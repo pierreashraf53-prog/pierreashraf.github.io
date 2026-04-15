@@ -196,63 +196,130 @@ form button:hover {
     transform: translateY(-3px);
 }
 
-/* 1. الحاوية (نفس فكرة الـ table-wrapper اللي بعتها) */
+/* ================= TABLE ================= */
+
+.table-content {
+    flex: 2;
+    min-width: 0;
+}
+
 .table-container {
     width: 100%;
     overflow-x: auto;
-    /* ده اللي بيعمل السكرول */
-    margin-bottom: 1rem;
-    border-radius: 12px;
-    border: 1px solid #333;
-    /* الإطار الخارجي */
+    /* horizontal scroll inside table area */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* 2. الجدول (نفس أبعاد الكود اللي بعته) */
 table {
     width: 100%;
+    min-width: 650px;
     border-collapse: collapse;
-    /* عشان الحدود تبقى خط واحد مش خطين */
-    min-width: 700px;
-    /* ده اللي بيجبره يسكرول في الموبايل */
-    background: #1e1e1e;
-    /* لونك الأسود */
-}
-
-/* 3. العناوين (نفس ستايل الكود اللي بعته بس بألوانك) */
-thead {
-    background: #252525;
-    /* خلفية الرأس */
+    color: #ddd;
 }
 
 th,
 td {
-    border: 1px solid #333;
-    /* نفس فكرة الـ border اللي في الكود الأزرق */
-    padding: 0.75rem;
-    /* نفس الـ padding بالظبط */
+    padding: 18px;
+    border-bottom: 1px solid #2d2d2d;
     text-align: left;
-    /* أو center لو تحب، بس الكود اللي بعته كان left */
-    color: #ccc;
+    white-space: nowrap;
 }
 
 th {
+    background-color: #252525;
     color: #8ce67f;
-    /* لونك الأخضر المميز */
-    font-weight: 600;
 }
 
-/* 4. تأثير الهوفر (نفس الكود اللي بعته) */
-tbody tr:hover {
-    background: #2a2a2a;
+tr:hover td {
+    background-color: #2a2a2a;
+    color: #fff;
 }
 
+/* ===== Table page only: lock page, move table only ===== */
+.table-page {
+    overflow-x: hidden;
+    touch-action: pan-y;
+    padding-top: 120px;
+}
 
+.table-page main {
+    overflow-x: hidden;
+}
 
-/* 6. منع اهتزاز الصفحة في الموبايل */
-@media (max-width: 768px) {
-    body {
-        overflow-x: hidden;
-    }
+.table-page h1,
+.table-page h2,
+.table-page h3 {
+    scroll-margin-top: 130px;
+}
+
+.table-page .table-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-page table {
+    width: max-content;
+    min-width: 700px;
+}
+
+/* ================= FORM ================= */
+
+form {
+    background: #1e1e1e;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin: 20px auto;
+}
+
+form h2 {
+    grid-column: span 2;
+    color: #fff;
+    border-bottom: 2px solid #556b2f;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #8ce67f;
+    margin-bottom: 8px;
+}
+
+input,
+textarea {
+    padding: 12px;
+    background: #252525;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+}
+
+textarea {
+    height: 100px;
+}
+
+.full-width,
+button,
+input[type="submit"] {
+    grid-column: span 2;
 }
 
 /* ================= FOOTER ================= */
