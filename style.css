@@ -228,6 +228,7 @@ td {
     padding: 18px;
     border-bottom: 1px solid #2d2d2d;
     text-align: left;
+    white-space: nowrap;
 }
 
 th {
@@ -372,10 +373,11 @@ footer {
         min-width: 0;
     }
 
-    .table-content {
-        flex: 1;
+    .table-container {
         width: 100%;
-        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
     }
 
     form {
