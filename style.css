@@ -6,7 +6,6 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-    /* يمنع سحب الصفحة كلها يمين/يسار */
 }
 
 body {
@@ -20,21 +19,25 @@ body {
     display: flex;
     flex-direction: column;
 
-    padding-top: 0;
-    /* تم إلغاءه عشان ما يبوظش الموبايل */
+    padding-top: 90px;
+    /* fixed header space */
 }
 
 main {
     flex: 1;
     width: 100%;
     overflow-x: hidden;
-
-    padding-top: 80px;
-    /* الحل الصحيح للهيدر */
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+/* headings visible with fixed header */
+h1,
+h2,
+h3 {
+    scroll-margin-top: 110px;
 }
 
 /* ================= HEADER ================= */
@@ -67,17 +70,24 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    /* keep words side by side */
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 0;
+    flex: 0 0 auto;
 }
 
 nav a {
     color: #bbb;
     text-decoration: none;
     font-weight: 500;
+    white-space: nowrap;
     transition: 0.3s;
 }
 
@@ -196,9 +206,9 @@ form button:hover {
 .table-container {
     width: 100%;
     overflow-x: auto;
+    /* horizontal scroll inside table area */
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-
     background: #1e1e1e;
     padding: 15px;
     border-radius: 15px;
@@ -207,8 +217,7 @@ form button:hover {
 }
 
 table {
-    width: max-content;
-    /* أهم تعديل */
+    width: 100%;
     min-width: 650px;
     border-collapse: collapse;
     color: #ddd;
@@ -229,6 +238,36 @@ th {
 tr:hover td {
     background-color: #2a2a2a;
     color: #fff;
+}
+
+/* ===== Table page only: lock page, move table only ===== */
+.table-page {
+    overflow-x: hidden;
+    touch-action: pan-y;
+    padding-top: 120px;
+}
+
+.table-page main {
+    overflow-x: hidden;
+}
+
+.table-page h1,
+.table-page h2,
+.table-page h3 {
+    scroll-margin-top: 130px;
+}
+
+.table-page .table-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-page table {
+    width: max-content;
+    min-width: 700px;
 }
 
 /* ================= FORM ================= */
@@ -307,10 +346,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-
-    main {
-        padding-top: 140px;
-        /* حل مشكلة الهيدر في الموبايل */
+    body {
+        padding-top: 110px;
     }
 
     .container {
@@ -319,13 +356,9 @@ footer {
     }
 
     nav ul {
-        flex-direction: column;
+        flex-direction: row;
+        /* still beside each other */
         align-items: center;
-    }
-
-    nav ul li {
-        margin-left: 0;
-        margin-bottom: 10px;
     }
 
     .section-wrapper {
@@ -351,5 +384,9 @@ footer {
 
     .hero-image-side img {
         max-height: 400px;
+    }
+
+    .table-page {
+        padding-top: 130px;
     }
 }
