@@ -6,6 +6,7 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden;
+    /* Prevent the whole page from sliding */
 }
 
 body {
@@ -201,14 +202,18 @@ form button:hover {
 .table-content {
     flex: 2;
     min-width: 0;
+    width: 100%;
 }
 
 .table-container {
+    display: block;
     width: 100%;
+    max-width: 100%;
     overflow-x: auto;
-    /* horizontal scroll inside table area */
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    /* Prevents the whole page from moving when table ends */
     background: #1e1e1e;
     padding: 15px;
     border-radius: 15px;
@@ -218,7 +223,8 @@ form button:hover {
 
 table {
     width: 100%;
-    min-width: 650px;
+    min-width: 800px;
+    /* Forces horizontal scroll on smaller screens */
     border-collapse: collapse;
     color: #ddd;
 }
@@ -229,6 +235,7 @@ td {
     border-bottom: 1px solid #2d2d2d;
     text-align: left;
     white-space: nowrap;
+    /* Keeps content on one line to force width */
 }
 
 th {
@@ -268,7 +275,7 @@ tr:hover td {
 
 .table-page table {
     width: max-content;
-    min-width: 700px;
+    min-width: 1000px;
 }
 
 /* ================= FORM ================= */
