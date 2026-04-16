@@ -5,7 +5,6 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-    /* الصفحة الأساسية ثابتة */
 }
 
 body {
@@ -50,7 +49,6 @@ header {
 
 .container {
     width: min(90%, 1200px);
-    /* وسعنا الحواف شوية للموبايل */
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -114,30 +112,40 @@ nav a:hover {
     padding: 60px 0 100px 0;
 }
 
-/* ================= TABLE (الحل هنا) ================= */
+/* ================= TABLE ================= */
 .table-content {
     width: 100%;
 }
 
+/* ⭐ أهم تعديل هنا */
 .table-container {
     width: 100%;
     overflow-x: auto;
-    /* يسمح بالحركة يمين وشمال */
+    overflow-y: hidden;
     display: block;
-    /* ضروري عشان الـ overflow يشتغل */
     background: #1e1e1e;
     padding: 15px;
     border-radius: 15px;
     margin: 20px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     -webkit-overflow-scrolling: touch;
-    /* نعومة الحركة على iOS */
+}
+
+/* يمنع أي عنصر أب يمسك الاسكرول */
+.table-page {
+    overflow-x: hidden;
+    padding-top: 120px;
+}
+
+.table-page .table-container {
+    overflow-x: auto !important;
 }
 
 table {
-    width: 100%;
-    min-width: 600px;
-    /* بيجبر الجدول يحافظ على عرضه فبيظهر الـ scroll */
+    min-width: 650px;
+    /* زودتها شوية عشان يضمن الاسكرول */
+    width: max-content;
+    /* 🔥 مهم جداً */
     border-collapse: collapse;
     color: #ddd;
 }
@@ -148,24 +156,11 @@ td {
     border-bottom: 1px solid #2d2d2d;
     text-align: left;
     white-space: nowrap;
-    /* بيمنع الكلام ينزل تحت بعضه عشان الجدول يفضل مفرود */
 }
 
 th {
     background-color: #252525;
     color: #8ce67f;
-}
-
-/* ===== Table Page Specific Fixes ===== */
-.table-page {
-    overflow-x: hidden;
-    padding-top: 120px;
-}
-
-.table-page .table-container {
-    overflow-x: auto !important;
-    touch-action: auto !important;
-    /* لغينا تقييد الـ pan-y */
 }
 
 /* ================= FORM ================= */
@@ -216,12 +211,21 @@ input[type="submit"] {
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
-.btn-start:hover {
+/* ⭐ ده كان ناقص */
+button:hover,
+input[type="submit"]:hover {
     background-color: #8ce67f;
     color: #121212;
+    transform: scale(1.05);
+}
+
+/* click effect */
+button:active,
+input[type="submit"]:active {
+    transform: scale(0.97);
 }
 
 /* ================= FOOTER ================= */
