@@ -22,22 +22,29 @@ body {
 main {
     flex: 1;
     width: 100%;
-    overflow-x: visible;
-    /* 🔥 كان hidden */
+    overflow-x: hidden;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-/* ================= HEADER ================= */
+h1,
+h2,
+h3 {
+    scroll-margin-top: 110px;
+}
+
+/* ================= HEADER & NAV ================= */
 header {
     background: #1a1a1a;
     border-bottom: 1px solid #333;
     padding: 15px 0;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+    z-index: 9999;
 }
 
 .container {
@@ -48,49 +55,154 @@ header {
     align-items: center;
 }
 
-/* ================= TABLE FIX ================= */
-
-/* 🔥 نلغي flex بس هنا */
-.table-section {
-    display: block;
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #8ce67f;
+}
+
+/* ================= HERO & SECTIONS ================= */
+.hero-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80vh;
+    gap: 20px;
+}
+
+.hero-text-side {
+    flex: 1;
+}
+
+.hero-image-side {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image-side img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    filter: drop-shadow(0 20px 50px rgba(140, 230, 127, 0.3));
+    transition: transform 0.4s ease;
+}
+
+.section-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding: 60px 0 100px 0;
+}
+
+/* ================= TABLE ================= */
 .table-content {
     width: 100%;
-    overflow-x: auto;
 }
 
-/* ده البوكس */
+/* ⭐ أهم تعديل هنا */
 .table-container {
     width: 100%;
     overflow-x: auto;
-    max-width: 100%;
+    overflow-y: hidden;
+    display: block;
     background: #1e1e1e;
     padding: 15px;
     border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    -webkit-overflow-scrolling: touch;
 }
 
-/* 🔥 أهم تعديل */
+/* يمنع أي عنصر أب يمسك الاسكرول */
+.table-page {
+    overflow-x: hidden;
+    padding-top: 120px;
+}
+
+.table-page .table-container {
+    overflow-x: auto !important;
+}
+
 table {
+    min-width: 650px;
+    /* زودتها شوية عشان يضمن الاسكرول */
     width: max-content;
-    min-width: 100%;
+    /* 🔥 مهم جداً */
     border-collapse: collapse;
+    color: #ddd;
 }
 
-/* الخلايا */
 th,
 td {
     padding: 15px;
     border-bottom: 1px solid #2d2d2d;
+    text-align: left;
     white-space: nowrap;
 }
 
 th {
-    background: #252525;
+    background-color: #252525;
     color: #8ce67f;
 }
 
+/* ================= FORM ================= */
+form {
+    background: #1e1e1e;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #8ce67f;
+    margin-bottom: 8px;
+}
+
+input,
+textarea {
+    padding: 12px;
+    background: #252525;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+}
+
+.full-width,
+button,
+input[type="submit"] {
+    grid-column: span 2;
+}
+
 /* ================= BUTTONS ================= */
+.btn-start,
 button,
 input[type="submit"] {
     background-color: #556b2f;
@@ -99,9 +211,10 @@ input[type="submit"] {
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
+/* ⭐ ده كان ناقص */
 button:hover,
 input[type="submit"]:hover {
     background-color: #8ce67f;
@@ -109,15 +222,67 @@ input[type="submit"]:hover {
     transform: scale(1.05);
 }
 
-button:active {
+/* click effect */
+button:active,
+input[type="submit"]:active {
     transform: scale(0.97);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: #1a1a1a;
+    padding: 30px;
+    text-align: center;
+    color: #777;
+    margin-top: auto;
 }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 
+    .hero-split,
+    .section-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width,
+    button,
+    input[type="submit"] {
+        grid-column: span 1;
+    }
+
     .container {
         flex-direction: column;
         gap: 15px;
     }
+}
+/* The container that handles the swiping */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal swiping */
+  -webkit-overflow-scrolling: touch; /* Makes swiping smooth on mobile */
+  margin: 20px 0;
+  border-radius: 8px; /* Optional: matches your UI style */
+}
+
+/* Ensure the table doesn't shrink too much */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Adjust this value if you want it to scroll sooner */
+}
+
+/* Optional: Style the scrollbar to match your dark/green theme */
+.table-wrapper::-webkit-scrollbar {
+  height: 5px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #2ecc71; /* Matches your green text/accent */
+  border-radius: 10px;
 }
