@@ -22,7 +22,6 @@ body {
 main {
     flex: 1;
     width: 100%;
-    overflow-x: hidden;
 }
 
 html {
@@ -61,15 +60,12 @@ nav ul {
     margin: 0;
     display: flex;
     gap: 15px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 nav a {
     color: #bbb;
     text-decoration: none;
     font-weight: 500;
-    white-space: nowrap;
     transition: 0.3s;
 }
 
@@ -77,75 +73,39 @@ nav a:hover {
     color: #8ce67f;
 }
 
-/* ================= HERO & SECTIONS ================= */
-.hero-split {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 80vh;
-    gap: 20px;
-}
-
-.hero-text-side {
-    flex: 1;
-}
-
-.hero-image-side {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.hero-image-side img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    filter: drop-shadow(0 20px 50px rgba(140, 230, 127, 0.3));
-    transition: transform 0.4s ease;
-}
-
+/* ================= SECTION WRAPPER ================= */
 .section-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 50px;
-    padding: 60px 0 100px 0;
+    padding: 60px 0;
 }
 
-/* ================= TABLE ================= */
-.table-content {
+/* تعديل خاص بمنطقة الجدول لمنع تضارب الـ Flex */
+.table-section {
+    display: block;
     width: 100%;
 }
 
-/* ⭐ أهم تعديل هنا */
+/* ================= TABLE (THE FIX) ================= */
 .table-container {
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
-    display: block;
+    /* تفعيل السكرول الأفقي */
+    -webkit-overflow-scrolling: touch;
     background: #1e1e1e;
-    padding: 15px;
+    padding: 20px;
     border-radius: 15px;
     margin: 20px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    -webkit-overflow-scrolling: touch;
-}
-
-/* يمنع أي عنصر أب يمسك الاسكرول */
-.table-page {
-    overflow-x: hidden;
-    padding-top: 120px;
-}
-
-.table-page .table-container {
-    overflow-x: auto !important;
+    border: 1px solid #333;
 }
 
 table {
-    min-width: 650px;
-    /* زودتها شوية عشان يضمن الاسكرول */
-    width: max-content;
-    /* 🔥 مهم جداً */
+    width: 100%;
+    min-width: 700px;
+    /* يضمن ظهور السكرول على الشاشات الصغيرة */
     border-collapse: collapse;
     color: #ddd;
 }
@@ -156,11 +116,32 @@ td {
     border-bottom: 1px solid #2d2d2d;
     text-align: left;
     white-space: nowrap;
+    /* يمنع الكلام ينزل سطر جديد في الجدول */
 }
 
 th {
     background-color: #252525;
     color: #8ce67f;
+}
+
+/* تخصيص شكل السكرول بار (الضوء الأخضر) */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #8ce67f;
+    border-radius: 10px;
+    border: 2px solid #1a1a1a;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a5f099;
 }
 
 /* ================= FORM ================= */
@@ -202,7 +183,6 @@ input[type="submit"] {
 }
 
 /* ================= BUTTONS ================= */
-.btn-start,
 button,
 input[type="submit"] {
     background-color: #556b2f;
@@ -214,18 +194,11 @@ input[type="submit"] {
     transition: 0.3s ease;
 }
 
-/* ⭐ ده كان ناقص */
 button:hover,
 input[type="submit"]:hover {
     background-color: #8ce67f;
     color: #121212;
     transform: scale(1.05);
-}
-
-/* click effect */
-button:active,
-input[type="submit"]:active {
-    transform: scale(0.97);
 }
 
 /* ================= FOOTER ================= */
@@ -239,11 +212,15 @@ footer {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-
-    .hero-split,
-    .section-wrapper {
+    .container {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
+    }
+
+    .section-wrapper {
+        flex-direction: column;
+        padding: 40px 0;
     }
 
     form {
@@ -255,34 +232,4 @@ footer {
     input[type="submit"] {
         grid-column: span 1;
     }
-
-    .container {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
-/* The container that handles the swiping */
-.table-wrapper {
-  width: 100%;
-  overflow-x: auto; /* Enables horizontal swiping */
-  -webkit-overflow-scrolling: touch; /* Makes swiping smooth on mobile */
-  margin: 20px 0;
-  border-radius: 8px; /* Optional: matches your UI style */
-}
-
-/* Ensure the table doesn't shrink too much */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px; /* Adjust this value if you want it to scroll sooner */
-}
-
-/* Optional: Style the scrollbar to match your dark/green theme */
-.table-wrapper::-webkit-scrollbar {
-  height: 5px;
-}
-
-.table-wrapper::-webkit-scrollbar-thumb {
-  background: #2ecc71; /* Matches your green text/accent */
-  border-radius: 10px;
 }
